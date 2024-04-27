@@ -60,7 +60,11 @@ class PositionalEncoding(nn.Module):
         positional_encoding[:, 1::2] = torch.cos(position * division_term)
         
         positional_encoding = positional_encoding.unsqueeze(dim=0)
+        self.register_buffer('positional_encoding',positional_encoding)
         
     def forward(self,x):
         x = x + (self.pe[:,:x.shape[1],:]).requires_grad(False)
         return self.dropout(x)
+    
+    
+    

@@ -1,9 +1,6 @@
 import torch.nn as nn
 
 
-
-
-
 class LayerNormalization(nn.Module):
     """
     Applies layer normalization to the input tensor.
