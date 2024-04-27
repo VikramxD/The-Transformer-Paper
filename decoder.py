@@ -26,7 +26,9 @@ class DecoderBlock(nn.Module):
     
   
     def forward(self,x,encoder_output,src_mask,tgt_mask):
+        # Apply self-attention
         x = self.skip_connection(x,lambda x: self.multihead_attention(x,x,x,tgt_mask))
+        # Apply cross-attention
         x = self.skip_connection(x,lambda x: self.cross_attention_block(x,encoder_output,encoder_output,src_mask))
         return x
     
@@ -39,6 +41,6 @@ class Decoder(nn.Module):
         
     def forward(self,x,encoder_output,src_mask,tgt_mask):
         for layer in self.layers:
+            # Apply each decoder block
             x = layer(x,encoder_output,src_mask,tgt_mask)
         return self.layernorm(x)
-    
