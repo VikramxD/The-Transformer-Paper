@@ -9,19 +9,6 @@ This repository contains a from-scratch implementation of the Transformer model,
 - Uses PyTorch for efficient computation and gradient calculations.
 - Includes Positional Encoding, Multi-Head Attention, and Feed Forward Network modules.
 
-## Code Example
-
-```python
-from transformer import Transformer
-import torch.nn as nn
-
-# Initialize the Transformer model
-model = Transformer(n_layers=6, n_heads=8, d_model=512)
-
-# Forward pass
-output = model.forward(input_tensor)
-```
-
 ## Installation
 
 To use this module, you need to have Python and PyTorch installed. You can install PyTorch by following the instructions on the [official website](https://pytorch.org/).

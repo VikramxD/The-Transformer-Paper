@@ -1,4 +1,4 @@
-"""Contains implementation of the Paper Attention is all you need in pytorch"""
+""" Implementing Input Embedding and Positional Encoding in pure pytorch """
 
 import torch
 import torch.nn as nn
@@ -56,8 +56,8 @@ class PositionalEncoding(nn.Module):
         division_term = torch.exp(torch.arange(0, embedding_dim, 2)).float() * (-torch.log(10000.0) / embedding_dim)
 
         # Apply the sin formula to the even positions and cosine formula to the odd positions
-        positional_encoding[:, 0::2] = torch.sin(position * division_term)
-        positional_encoding[:, 1::2] = torch.cos(position * division_term)
+        positional_encoding[:, 0::2] = torch.sin(position * division_term) # Every two Terms even -> 0 -> 2 -> 4 
+        positional_encoding[:, 1::2] = torch.cos(position * division_term) # Every two Terms odd -> 1 -> 3 -> 5
         
         positional_encoding = positional_encoding.unsqueeze(dim=0)
         self.register_buffer('positional_encoding',positional_encoding)
