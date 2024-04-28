@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 from encoder import Encoder,EncoderBlock
 from decoder import Decoder,LinearLayer,DecoderBlock
