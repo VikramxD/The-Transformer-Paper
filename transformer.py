@@ -131,5 +131,19 @@ def build_model(src_vocab_size:int,src_seq_len:int,tgt_sequence_len:int,tgt_voca
         feed_forward_block = FeedForwardBlock(embedding_dim=embedding_dimension,feed_forward_dim=feed_forward_dim,dropout=dropout)
         decoder_block = DecoderBlock(decoder_multihead_attention_block,decoder_cross_attention_block,feed_forward_block,dropout)
         decoder_blocks.append(decoder_block)    
+    
+    ## Build Encoder,Decoder
+    encoder = Encoder(nn.ModuleList(encoder_block))
+    decoder = Decoder(nn.ModuleList(decoder_block))
+    
+    # Linear Layer
+    linear_layer = LinearLayer(embedding_dim=embedding_dimension,vocab_size=tgt_vocab_size)
+    transformer = Transformer(encoder,decoder,src_embedding,tgt_embedding,src_positional_encoding,tgt_positional_encoding,linear_layer)
+    
+    for params in transformer.parameters():
+        if params.dim() > 1:
+            nn.init.xavier_uniform_(params)
+            
+    return transformer
         
     
